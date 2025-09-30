@@ -10,6 +10,7 @@ import { RootState } from "@/redux/store";
 import { addPokemon } from "@/redux/teamsSlice";
 
 import { fetchPokemon } from "@/lib/fetchPokemon";
+import { Pokemon } from "@/lib/types";
 
 export default function SearchArea() {
   const dispatch = useDispatch();
@@ -18,13 +19,14 @@ export default function SearchArea() {
   const teams = useSelector((s: RootState) => s.teams.teams);
 
   const [query, setQuery] = useState("");
-  const [pokemon, setPokemon] = useState<any>(null);
+  const [pokemon, setPokemon] = useState<Pokemon | null>(null);
   const [loading, setLoading] = useState(false);
 
   async function handleSearch() {
     try {
       setLoading(true);
       const pok = await fetchPokemon(query);
+      console.log(pok);
       setPokemon(pok);
     } catch {
       toast.error("Pokemon not found");
@@ -98,7 +100,7 @@ export default function SearchArea() {
             <h3 className="font-semibold capitalize">{pokemon.name}</h3>
 
             <div className="text-xs text-slate-600">
-              Types: {pokemon.types.map((t: any) => t.name).join(", ")}
+              Types: {pokemon.types.map((t) => t.name).join(", ")}
             </div>
 
             <div className="text-xs text-slate-600">

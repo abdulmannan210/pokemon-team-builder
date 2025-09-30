@@ -14,7 +14,9 @@ export async function fetchPokemon(query: string): Promise<Pokemon> {
     id: data.id,
     name: data.name,
     sprites: { front_default: data.sprites.front_default },
-    types: data.types.map((t: any) => ({ name: t.type.name })),
+    types: data.types.map((t: { type: { name: string } }) => ({
+      name: t.type.name,
+    })),
     base_experience: data.base_experience ?? 0,
   };
 }

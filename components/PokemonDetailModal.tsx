@@ -4,12 +4,12 @@ import Image from "next/image";
 
 import Modal from "@/components/Modal";
 
-import { PokemonDetail } from "@/lib/types";
+import { Pokemon } from "@/lib/types";
 
 interface PokemonDetailModalProps {
   open: boolean;
   onClose: () => void;
-  pokemon?: PokemonDetail;
+  pokemon?: Pokemon;
 }
 
 export default function PokemonDetailModal({

@@ -15,6 +15,8 @@ import IconPlus from "@/components/icons/IconPlus";
 import ConfirmModal from "@/components/ConfirmModal";
 import PokemonDetailModal from "@/components/PokemonDetailModal";
 
+import { Pokemon } from "@/lib/types";
+
 export default function Sidebar() {
   const dispatch = useDispatch();
 
@@ -38,9 +40,10 @@ export default function Sidebar() {
   }>({
     open: false,
   });
-  const [detail, setDetail] = useState<{ open: boolean; pokemon?: any }>({
+  const [detail, setDetail] = useState<{ open: boolean; pokemon?: Pokemon }>({
     open: false,
   });
+
   const [drawerOpen, setDrawerOpen] = useState(false);
 
   const activeTeam = teams.find((t) => t.id === activeTeamId) ?? null;
@@ -132,6 +135,7 @@ export default function Sidebar() {
 
                     <button
                       onClick={(e) => {
+                        e.stopPropagation();
                         setShowDelete({
                           open: true,
                           id: team.id,
@@ -193,7 +197,7 @@ export default function Sidebar() {
                     <button
                       onClick={(e) => {
                         e.stopPropagation();
-                        
+
                         dispatch(
                           removePokemon({
                             teamId: activeTeam.id,

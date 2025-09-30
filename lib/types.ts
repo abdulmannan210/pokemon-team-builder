@@ -3,8 +3,8 @@ export type SimpleType = { name: string };
 export type Pokemon = {
   id: number;
   name: string;
-  sprites: { front_default: string | null };
-  types: SimpleType[];
+  sprites: { front_default: string };
+  types: { name: string }[];
   base_experience: number;
 };
 
@@ -14,16 +14,6 @@ export type TeamsState = {
   teams: Team[];
   activeTeamId: string | null;
 };
-
-export interface PokemonDetail {
-  id: number;
-  name: string;
-  sprites: {
-    front_default: string;
-  };
-  types: { name: string }[];
-  base_experience: number;
-}
 
 export interface ConfirmModalProps {
   open: boolean;
